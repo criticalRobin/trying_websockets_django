@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="messagesList">
+      {% for message in object_list %}
+        <li>{{ message.text }}</li>
+        {% empty %}
+        <li>No messages yet.</li>
+      {% endfor %}
+    </ul>
+
+    <script>
+      const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/messages/')
+      
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data)
+        if (data.message) {
+          const newElement = document.createElement('li')
+          newElement.textContent = data.message
+          document.querySelector('#messagesList').appendChild(newElement)
+        }
+      }
+      
+      chatSocket.onclose = function (e) {
+        console.error('Chat socket closed unexpectedly')
+      }
+    </script>
+  </body>
+</html>
