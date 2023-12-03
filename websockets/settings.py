@@ -26,9 +26,18 @@ SECRET_KEY = "django-insecure-el#e+n+m*a@#e$x0egn@e4_(4b$$4_jl1j%o37c(iooph=z2^0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2', '192.168.1.9', '192.168.1.1', '192.168.1.8']
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",  # Dirección del servidor de desarrollo de Django
+    "http://127.0.0.1:8000",  # También puedes usar la dirección IP loopback
+    "http://localhost:3000",  # Reemplaza con la dirección de tu aplicación Flutter
+    "http://10.0.2.2:8000",
+    "http://192.168.1.8:3000",
+    "http://192.168.1.9:3000",
+    "http://192.168.1.8:8000",
+    "http://192.168.1.9:8000"
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",  # rest framework
     # my apps
+    'corsheaders',
     "apps.message",
 ]
 
@@ -64,6 +74,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = "websockets.urls"
