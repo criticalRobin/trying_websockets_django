@@ -35,7 +35,6 @@ env/
 
 # VS Code settings
 .vscode/
-
 # OS generated files
 .DS_Store
 .DS_Store?
