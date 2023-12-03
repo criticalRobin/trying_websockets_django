@@ -15,7 +15,7 @@
     </ul>
 
     <script>
-      const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/messages/')
+      const chatSocket = new WebSocket('wss://prueba-websocket.onrender.com/ws/messages/')
       
       chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data)
